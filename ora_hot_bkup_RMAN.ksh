@@ -353,7 +353,7 @@ function backup_db_files
 #MN  gzip < \$* > $BDB_DIR/`basename \$*`.gz
 #MN 2017-09-24 - filename of zip file is formed from full path of the file replacing / with _
 #   this to avoid overwriting a file if files are with the same name but in different directories.
-  gzip < \$* > $BDB_DIR/`echo \$* | sed 's/\//_/g`.gz
+  gzip < \$* > $BDB_DIR/`echo \$* | sed 's/\//_/g'`.gz
   #dsmc inc \$*  > \$dumpto 2>&1
   #       dsmc inc -quiet $*
   #check_err_file;
