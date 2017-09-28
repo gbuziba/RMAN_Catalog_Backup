@@ -281,21 +281,21 @@ fi
 cat $BSCRIPT_DIR/temp1 > $BSCRIPT_DIR/tablespace.lst
 
 #*** create a ksh backup script for each tablespace
-for TABLESPACE in `cat $BSCRIPT_DIR/tablespace.lst`
+  for TABLESPACE in `cat $BSCRIPT_DIR/tablespace.lst`
   do
      echo TABLESPACE: $TABLESPACE
-	 tblsp_script $TABLESPACE
-	   done
-
-	   #*** run each tablspace backup script
-	   echo "run tablespace_backup scripts here!!!!!";
-	   for TABLESPACE in `cat $BSCRIPT_DIR/tablespace.lst`
-	   do
-	     sleep 10;
-	     $BSCRIPT_DIR/$TABLESPACE\_bkupx.ksh
+     tblsp_script $TABLESPACE
   done
-  wait;
-  echo "TABLESPACE BACKUPS COMPLETE";
+
+#*** run each tablspace backup script
+   echo "run tablespace_backup scripts here!!!!!";
+   for TABLESPACE in `cat $BSCRIPT_DIR/tablespace.lst`
+   do
+     sleep 10;
+     $BSCRIPT_DIR/$TABLESPACE\_bkupx.ksh
+   done
+wait;
+echo "TABLESPACE BACKUPS COMPLETE";
 return 0;
 }
 
@@ -353,7 +353,7 @@ function backup_db_files
 #MN  gzip < \$* > $BDB_DIR/`basename \$*`.gz
 #MN 2017-09-24 - filename of zip file is formed from full path of the file replacing / with _
 #   this to avoid overwriting a file if files are with the same name but in different directories.
-  gzip < \$* > $BDB_DIR/`echo \$* | sed 's/\//_/g'`.gz
+  gzip < \$* > $BDB_DIR/\`echo \$* | sed 's/\//_/g'\`.gz
   #dsmc inc \$*  > \$dumpto 2>&1
   #       dsmc inc -quiet $*
   #check_err_file;
